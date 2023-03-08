@@ -1,0 +1,22 @@
+default_language_version:
+  python: python3.9
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.0.231"
+    hooks:
+      - id: ruff
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+  - repo: https://github.com/python-poetry/poetry
+    rev: "1.3"
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+        args: ["--no-update"]
+      - id: poetry-export
+        args: ["-o", "lambdas/layer/requirements.txt", "--without-hashes"]
+      - id: poetry-export
+        args:
+          ["-o", "requirements.txt", "--only", "deployment", "--without-hashes"]
